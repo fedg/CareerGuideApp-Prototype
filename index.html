@@ -1,0 +1,1054 @@
+<!DOCTYPE html> 
+<html>
+<head> 
+<!--==========================APPLICATION TITLE==========================-->
+	<title>CAREER GUIDE</title> 
+
+<!--==========================GYROSCOPE PORTRAIT LANDSCAPE==========================-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+<!--==========================IPHONE NAV BARS REMOVE==========================-->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	
+<!--==========================APPLE ICONS==========================-->
+	<link rel="apple-touch-startup-image" href="startup1.png">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+	
+<!--==========================FAVICON==========================-->
+	<link rel="shortcut icon" href="/favicon.ico">
+
+<!--==========================GENERAL STYLESHEET==========================-->
+	<link rel="stylesheet" href="css/styles.css" type="text/css" />
+
+<!--==========================JQ MOBILE STYLESHEETS==========================-->
+	<link rel="stylesheet" href="css/jquery.mobile.structure-1.0.1.css" />
+	<link rel="stylesheet" href="css/jquery.mobile-1.0.1.css" type="text/css" />
+
+<!--==========================JQ MOBILE AND JQUERY CORE=========================-->
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
+
+<!--==========================INDEPENDENT JAVASCRIPT=========================-->
+	<script type="text/javascript">
+			
+			
+			(function(){
+			    // remove layerX and layerY
+			    var all = $.event.props,
+			        len = all.length,
+			        res = [];
+			    while (len--) {
+			      var el = all[len];
+			      if (el != 'layerX' && el != 'layerY') res.push(el);
+			    }
+			    $.event.props = res;
+			}());
+			
+			$(document).ready(function() {
+			  $('#slidebottom a').click(function() {
+			    var $lefty = $(this).next();
+			    $lefty.animate({
+			      left: parseInt($lefty.css('left'),10) == 0 ?
+			        -$lefty.outerWidth() : 0
+			    });
+			  });
+			});
+			
+			<!-- begin quiz script -->
+			function finish() {
+				var ext = '.html';
+				var results = new Array("none","artisan","rational","idealist","guardian");
+				var nums = new Array(5);
+				for(var i = 0; i < nums.length; i++) nums[i] = 0;
+				for(var i = 1; i <= 5; i++) {
+					var q = document.forms['quiz'].elements['question_'+i];
+					if(q[0].type=='checkbox') {
+						var n = 0;
+					}
+					for(var j = 0; j < q.length; j++) {
+						if(q[j].checked) {
+							var a = q[j].value.split(',');
+							for(var k = 0; k < a.length; k++) {
+								nums[a[k]]++;
+							}
+							if(q[j].type=='radio') break;
+							else n++;
+						}
+						if(j == q.length-1&&q[j].type=='radio') {nums[0]++;}
+					}
+					if(q[0].type=='checkbox'&&((document.forms['quiz'].elements['question_'+i+'_min']&&n<document.forms['quiz'].elements['question_'+i+'_min'].value)||(document.forms['quiz'].elements['question_'+i+'_max']&&n>document.forms['quiz'].elements['question_'+i+'_max'].value))) nums[0]++;
+				}
+				var j = new Array('0');
+				for (i in nums) if(nums[i]>nums[j[0]]){j=new Array(''+i);} else if(nums[i]==nums[j[0]])j[j.length] = i;
+				//var o = '';for(var i in results)o+=results[i]+'='+nums[i]+'\n';
+				//alert(o);
+				if(nums[0]!=0) {
+					alert('You missed or incorrectly answered '+nums[0]+' questions!');
+				}
+				else if(j[0]==0) {
+					alert('No result could be determined.');
+				}
+				else {
+					//location = results[j[0]]+ext;
+					
+					$('#' + results[j[0]]).fadeIn("slow");
+				}
+			}
+			<!-- end quiz script -->          
+		
+		</script>
+  
+</head>  
+
+
+
+<body data-theme="c"> 
+<!--==========================SECTION ONE - OPENING/INTRO PAGE ==========================-->
+		<section id="page1" data-role="page">
+		
+			<div data-role="content" class="content">
+				
+				<div id="intro">
+					<div class="ribbonfull"><h6>Career Guide</h6></div>
+					
+					<div id="mainlogo"><img src="css/images/Main700.png" /></div>
+					
+					<p>Explore your career opportunities, and help define your personal career path.</p>
+					<a href="#page2" data-role="button"  data-icon="arrow-r" data-iconpos="right" data-transition="fade">Let's get started</a>
+					
+				</div>
+			</div>
+			
+		</section>
+<!--==========================END SECTION ONE==========================-->
+		
+		
+<!--==========================SECTION TWO - TEMPERAMENTS PAGE & QUIZ LINK==========================-->
+		<section id="tempinfo-r" data-role="page">
+			<div class="tempinfo">
+				<a href="#page2" data-role="button" data-transition="flip">
+					<img src="css/images/RationalBadge500.png">
+					<p>Rationals are the problem solvers. They are rigorously logical and value competence and ingenuity above all</p>
+				</a>
+				<a href="" data-rel="back" data-role="button">Back</a>
+			</div>
+		</section>
+		
+		<section id="tempinfo-i" data-role="page">
+			<div class="tempinfo">
+				<a href="#page2" data-role="button" data-transition="flip">
+					<img src="css/images/IdealistBadge500.png">
+					<p>Idealists are passionately concerned with personal growth and development. Their quest for self-knowledge drives their imagination</p>
+				</a>
+				<a href="" data-rel="back" data-role="button">Back</a>
+			</div>
+		</section>
+		
+		<section id="tempinfo-a" data-role="page">
+			<div class="tempinfo">
+				<a href="#page2" data-role="button" data-transition="flip">
+					<img src="css/images/ArtisanBadge500.png">
+					<p>Artisans want to be where the action is. Spontaneous, adaptable and competitive, they believe today must be enjoyed</p>
+				</a>
+				<a href="" data-rel="back" data-role="button">Back</a>
+			</div>
+		</section>
+		
+		<section id="tempinfo-g" data-role="page">
+			<div class="tempinfo">
+				<a href="#page2" data-role="button" data-transition="flip">
+					<img src="css/images/GuardianBadge500.png">
+					<p>Guardians are the cornerstone of society. For they are given to serving and preserving our most important social institutions</p>
+				</a>
+				<a href="" data-rel="back" data-role="button">Back</a>
+			</div>
+		</section>
+		
+		<section id="page2" data-role="page">
+				
+			<div data-role="content">
+				
+				<div id="header">
+					<div class="ribbonfull" data-icon="alert" data-iconpos="right"><h6>WHO ARE YOU?</h6></div>
+					<!-- <span><p>Help us point you in the right direction by choosing a personality temperament, or if you're unsure, by taking our quiz.</p>
+					</span> -->
+				</div>
+				
+				<div class="bannerRight">
+					
+					<div class="badge">
+						<a href="#page5" data-transition="fade"><img src="css/images/RationalBadge500.png">
+						</a>
+						<div id="infobtn"><a href="#tempinfo-r" data-icon="alert" data-transition="flip" data-rel="dialog" data-role="button"></a></div>
+					</div>
+					<div class="badge">
+						<a href="#page7" data-transition="fade"><img src="css/images/IdealistBadge500.png">
+						</a>
+						<div id="infobtn"><a href="#tempinfo-i" data-icon="alert" data-transition="flip" data-rel="dialog" data-role="button"></a></div>						
+					</div>
+										
+				</div>
+					
+				<div class="bannerLeft">
+						
+					<div class="badge">
+						<a href="#page4" data-transition="fade"><img src="css/images/ArtisanBadge500.png">
+						</a>
+						<div id="infobtn"><a href="#tempinfo-a" data-icon="alert" data-transition="flip" data-rel="dialog" data-role="button"></a></div>
+					</div>
+					<div class="badge">
+						<a href="#page6" data-transition="fade"><img src="css/images/GuardianBadge500.png">
+						</a>
+						<div id="infobtn"><a href="#tempinfo-g" data-icon="alert" data-transition="flip" data-rel="dialog" data-role="button"></a></div>
+					</div>
+											
+				</div>
+							
+			</div>
+			
+			<div id="quizbtn">
+				<a href="#quiz" data-role="button" data-icon="arrow-r" data-iconpos="right" data-transition="fade">Not sure what temperament you are?<br /> Take our quiz and find out!</a>
+			</div>
+						
+<!--			<div data-role="footer" data-theme="c"  >  
+			  <div data-role="navbar" data-iconpos="top"> 
+			  	<ul>
+			  		<li><a data-transition="fade" class="ui-btn-inactive" data-icon="back" onClick="history.back()">Go Back</a></li>
+			  		<li><a href="#page3" data-transition="fade" class="ui-btn-inactive" data-icon="search">Career Find</a></li>
+			  		<li><a href="#page9" data-transition="fade" class="ui-btn-inactive" data-icon="grid">Recent Jobs</a></li>
+			  	</ul>
+			  </div>
+			</div>-->
+			    			
+		</section>
+<!--==========================END SECTION TWO==========================-->
+		
+		
+<!--==========================SECTION QUIZ==========================-->
+		<section id="quiz" data-role="page">
+			
+			<div data-role="content" class="content">
+			
+			<div class="ribbonfull"><h6>THE QUIZ</h6></div>
+				
+				<!-- begin quiz html -->
+				<form name="quiz" action="javascript:finish();">
+					<div>			
+						<strong>Question 1: Waiting in line, do you often...</strong> 
+						<ul>
+							<li>
+								<input name="question_1" type="radio" value="1" id="q1-1">
+								<label for="q1-1">Fiddle with your belongings</label>
+							</li>
+							
+							<li>
+								<input name="question_1" type="radio" value="2" id="q1-2">
+								<label for="q1-2">Stick to business</label>
+							</li>
+							
+							<li>
+								<input name="question_1" type="radio" value="3" id="q1-3">
+								<label for="q1-3">Observe your surroundings</label>
+							</li>
+							
+							<li>
+								<input name="question_1" type="radio" value="4" id="q1-4">
+								<label for="q1-4">Ponder important issues</label>
+							</li>
+						</ul>
+					</div>
+					
+					<br /><br />
+					
+					<div>
+						<strong>Question 2: Does interacting with strangers...</strong>
+						<ul>
+							<li>
+								<input name="question_2" type="radio" value="1" id="q2-1">
+								<label for="q2-1">Generally Interest you</label>
+							</li>
+							
+							<li>
+								<input name="question_2" type="radio" value="2" id="q2-2">
+								<label for="q2-2">Tax your reserves</label>
+							</li>
+							
+							<li>
+								<input name="question_2" type="radio" value="3" id="q2-3">
+								<label for="q2-3">Present opportunities to discuss issues</label>
+							</li>
+							
+							<li>
+								<input name="question_2" type="radio" value="4" id="q2-4">
+								<label for="q2-4">Energize you</label>
+							</li>
+						</ul>
+					</div>
+					
+					<br /><br />
+					
+					<div>
+						<strong>Question 3: It's Easier for you to..</strong>
+						<ul>
+							<li>
+								<input name="question_3" type="radio" value="1" id="q3-1">
+								<label for="q3-1">Put your self to good use</label>
+							</li>
+							
+							<li>
+								<input name="question_3" type="radio" value="2" id="q3-2">
+								<label for="q3-2">Put others to good use</label>
+							</li>
+							
+							<li>
+								<input name="question_3" type="radio" value="3" id="q3-3">
+								<label for="q3-3">Inspire action in others</label>
+							</li>
+							
+							<li>
+								<input name="question_3" type="radio" value="4" id="q3-4">
+								<label for="q3-4">Support Others in their tasks</label>
+							</li>
+						</ul>
+					</div>
+					
+					<br /><br />
+					
+					<div>
+						<strong>Question 4: You prefer...</strong>
+						<ul>
+							<li>
+								<input name="question_4" type="radio" value="1" id="q4-1">
+								<label for="q4-1">Active and involved tasks</label>
+							</li>
+							
+							<li>
+								<input name="question_4" type="radio" value="2" id="q4-2">
+								<label for="q4-2">Organizing and strategizing</label>
+							</li>
+							
+							<li>
+								<input name="question_4" type="radio" value="3" id="q4-3">
+								<label for="q4-3">Propelling others into action</label>
+							</li>
+							
+							<li>
+								<input name="question_4" type="radio" value="4" id="q4-4">
+								<label for="q4-4">Nurturing and supportive roles</label>
+							</li>
+						</ul>
+					</div>
+						
+					<br /><br />
+					
+					<div>
+						<strong>Question 5: When the phone is ringing you...</strong>	
+						<ul>
+							<li>
+								<input name="question_5" type="radio" value="1" id="q5-1">
+								<label for="q5-1">Jump up and get it</label>
+							</li>
+							
+							<li>
+								<input name="question_5" type="radio" value="2" id="q5-2">
+								<label for="q5-2">Stay on your current task</label>
+							</li>
+							
+							<li>
+								<input name="question_5" type="radio" value="3" id="q5-3">
+								<label for="q5-3">Screen the call</label>
+							</li>
+							
+							<li>
+								<input name="question_5" type="radio" value="4" id="q5-4">
+								<label for="q5-4">You're too busy to pick up</label>
+							</li>
+						</ul>
+					</div>
+					
+					<br /><br />
+	
+					<INPUT TYPE="submit" value="Finish" data-icon="check" data-iconpos="top" class="quizbtn" data-theme="d" ></INPUT>
+					<INPUT TYPE="button" onClick="window.location.reload()" value="Reset" data-icon="refresh" data-iconpos="top" class="quizbtn"></INPUT>
+				</form>
+								
+			</div>
+			
+			<div id="rational" class="quizresult">
+					
+				<div id="reslogo"><img src="css/images/Rational500.png" /></div>
+						
+					<div id="resintro">
+						<p>You're a Rational Bro, rationals are the problem solvers. They are rigorously logical and value competence and ingenuity above all.</p>
+						<a href="#page5" data-role="button" data-transition="fade" data-icon="arrow-r" data-iconpos="right">Hell Ye! Let's Continue...</a>
+					</div>
+			</div>
+			
+			<div id="guardian" class="quizresult">
+					
+				<div id="reslogo"><img src="css/images/Guardian500.png" /></div>
+						
+					<div id="resintro">
+						<p>You're a Guardian Bro, guardians are the cornerstone of society. For they are given to serving and preserving our most important social institutions.</p>
+						<a href="#page6" data-role="button" data-transition="fade" data-icon="arrow-r" data-iconpos="right">Hell Ye! Let's Continue...</a>
+					</div>
+			</div>
+			
+			<div id="artisan" class="quizresult">
+					
+				<div id="reslogo"><img src="css/images/Artisan500.png" /></div>
+						
+					<div id="resintro">
+						<p>You're an Artisan Bro, artisans want to be where the action is. Spontaneous, adaptable and competitive, they believe today must be enjoyed.</p>
+						<a href="#page4" data-role="button" data-transition="fade" data-icon="arrow-r" data-iconpos="right">Hell Ye! Let's Continue...</a>
+					</div>
+			</div>
+			
+			<div id="idealist" class="quizresult">
+					
+				<div id="reslogo"><img src="css/images/Idealist500.png" /></div>
+						
+					<div id="resintro">
+						<p>You're an Idealist Bro, idealists are passionately concerned with personal growth and development. Their quest for self-knowledge drives their imagination.</p>
+						<a href="#page7" data-role="button" data-transition="fade" data-icon="arrow-r" data-iconpos="right">Hell Ye! Let's Continue...</a>
+					</div>
+			</div>
+					
+			<div data-role="footer" data-theme="c"  >  
+				<div data-role="navbar" data-iconpos="top"> 
+				  	<ul>
+				  		<li><a data-transition="fade" class="ui-btn-inactive" data-icon="back" onClick="history.back()">Go Back</a></li>
+				  		<li><a href="#page3" data-transition="fade" class="ui-btn-inactive" data-icon="search">Career Find</a></li>
+				  		<li><a href="#page9" data-transition="fade" class="ui-btn-inactive" data-icon="grid">Recent Jobs</a></li>
+				  	</ul>
+			 	</div>
+			</div>
+			
+		</section>
+		
+<!--==========================END SECTION QUIZ==========================-->
+
+
+<!--==========================SECTION THREE - ALL CAREER SEARCH==========================-->
+		<section id="page3" data-role="page">
+			
+			<div data-role="content" class="content">
+		
+				<div class="ribbonfull"><h6>ALL CAREERS</h6></div>
+				<ul data-role="listview" data-inset="true" data-filter="true" >
+					<li><a href="#page8" data-transition="fade"><span class="filter"><img src="css/images/ArtisanBadge500.png" /></span>Graphic Designer</a></li>
+					<li><a href="#page8"><span class="filter"><img src="css/images/ArtisanBadge500.png" /></span>Carpenter</a></li>
+					<li><a href="#page8"><span class="filter"><img src="css/images/ArtisanBadge500.png" /></span>Baker</a></li>
+					<li><a href="#page8"><span class="filter"><img src="css/images/ArtisanBadge500.png" /></span>Chef</a></li>
+					<li><a href="#page8"><span class="filter"><img src="css/images/ArtisanBadge500.png" /></span>Interior Designer</a></li> 
+					<li><a href="#page10" data-transition="fade"><span class="filter"><img src="css/images/RationalBadge500.png" /></span>Physicist</a></li>
+					<li><a href="#page10"><span class="filter"><img src="css/images/RationalBadge500.png" /></span>Systems Analyst</a></li>
+					<li><a href="#page10"><span class="filter"><img src="css/images/RationalBadge500.png" /></span>Lab Technician </a></li>
+					<li><a href="#page10"><span class="filter"><img src="css/images/RationalBadge500.png" /></span>Claims Adjustor</a></li>
+					<li><a href="#page10"><span class="filter"><img src="css/images/RationalBadge500.png" /></span>Accountant</a></li>
+					<li><a href="#page11" data-transition="fade"><span class="filter"><img src="css/images/GuardianBadge500.png" /></span>General Practitioner</a></li>
+					<li><a href="#page11"><span class="filter"><img src="css/images/GuardianBadge500.png" /></span>Human Resources Officer</a></li>
+					<li><a href="#page11"><span class="filter"><img src="css/images/GuardianBadge500.png" /></span>Police Officer </a></li>
+					<li><a href="#page11"><span class="filter"><img src="css/images/GuardianBadge500.png" /></span>Lawyer</a></li>
+					<li><a href="#page11"><span class="filter"><img src="css/images/GuardianBadge500.png" /></span>Nurse</a></li>
+					<li><a href="#page12" data-transition="fade"><span class="filter"><img src="css/images/IdealistBadge500.png" /></span>Teacher</a></li>
+					<li><a href="#page12"><span class="filter"><img src="css/images/IdealistBadge500.png" /></span>Civil Rights Advocate</a></li>
+					<li><a href="#page12"><span class="filter"><img src="css/images/IdealistBadge500.png" /></span>Guidance Councellor </a></li>
+					<li><a href="#page12"><span class="filter"><img src="css/images/IdealistBadge500.png" /></span>Psychatrist</a></li>
+					<li><a href="#page12"><span class="filter"><img src="css/images/IdealistBadge500.png" /></span>Journalist</a></li>
+				</ul>
+			</div>
+			
+			<div data-role="footer" data-theme="c"  >  
+			  <div data-role="navbar" data-iconpos="top"> 
+			  	<ul>
+			  		<li><a data-transition="fade" class="ui-btn-inactive" data-icon="back" onClick="history.back()">Go Back</a></li>
+			  		<li><a href="#page3" data-transition="fade" class="ui-btn-inactive" data-icon="search">Career Find</a></li>
+			  		<li><a href="#page9" data-transition="fade" class="ui-btn-inactive" data-icon="grid">Recent Jobs</a></li>
+			  	</ul>
+			  </div>
+			</div>
+			
+		</section>
+<!--==========================END SECTION THREE==========================-->
+
+<!--==========================SECTION FOUR - ARTISAN CAREERS==========================-->
+		<section id="page4" data-role="page">
+			
+			<div data-role="content" class="content">
+		
+				<div id="ribbon-a" class="ribbon"><h6>ARTISAN CAREERS</h6></div>
+				<ul data-role="listview" data-inset="true" data-filter="true" >
+					<li><a href="#page8" data-transition="fade">Graphic Designer</a></li>
+					<li><a href="#page8">Carpenter</a></li>
+					<li><a href="#page8">Baker</a></li>
+					<li><a href="#page8">Chef</a></li>
+					<li><a href="#page8">Interior Designer</a></li> 
+				</ul>
+			</div>
+			
+			<div data-role="footer" data-theme="c"  >  
+			  <div data-role="navbar" data-iconpos="top"> 
+			  	<ul>
+			  		<li><a data-transition="fade" class="ui-btn-inactive" data-icon="back" onClick="history.back()">Go Back</a></li>
+			  		<li><a href="#page3" data-transition="fade" class="ui-btn-inactive" data-icon="search">Career Find</a></li>
+			  		<li><a href="#page9" data-transition="fade" class="ui-btn-inactive" data-icon="grid">Recent Jobs</a></li>
+			  	</ul>
+			  </div>
+			</div>
+			
+<!--			<div class="slidenav">
+				<ul>
+					<li><a href="http://">temp</a></li>
+					<li><a href="http://">careers</a></li>
+					<li><a href="http://">jobs</a></li>
+				</ul>
+			</div>
+			
+			<div id="slidebottom" class="slide">
+			  <a href="#">slide it</a>
+			  <div class="inner">Slide from bottom</div>
+			</div>-->
+			
+			
+		</section>
+<!--==========================END SECTION FOUR==========================-->
+
+
+<!--==========================SECTION FIVE - RATIONAL CAREERS==========================-->
+		<section id="page5" data-role="page">
+			
+			<div data-role="content" class="content">
+		
+				<div id="ribbon-r" class="ribbon"><h6>RATIONAL CAREERS</h6></div>
+				<ul data-role="listview" data-inset="true" data-filter="true" >
+					<li><a href="#page10" data-transition="fade">Physicist</a></li>
+					<li><a href="#page10">Systems Analyst</a></li>
+					<li><a href="#page10">Lab Technician </a></li>
+					<li><a href="#page10">Claims Adjustor</a></li>
+					<li><a href="#page10">Accountant</a></li> 
+				</ul>
+			</div>
+			
+			<div data-role="footer" data-theme="c"  >  
+			  <div data-role="navbar" data-iconpos="top"> 
+			  	<ul>
+			  		<li><a data-transition="fade" class="ui-btn-inactive" data-icon="back" onClick="history.back()">Go Back</a></li>
+			  		<li><a href="#page3" data-transition="fade" class="ui-btn-inactive" data-icon="search">Career Find</a></li>
+			  		<li><a href="#page9" data-transition="fade" class="ui-btn-inactive" data-icon="grid">Recent Jobs</a></li>
+			  	</ul>
+			  </div>
+			</div>
+			
+		</section>
+<!--==========================END SECTION FIVE==========================-->
+
+
+<!--==========================SECTION SIX - GUARDIAN CAREERS==========================-->
+		<section id="page6" data-role="page">
+			
+			<div data-role="content" class="content">
+		
+				<div id="ribbon-g" class="ribbon"><h6>GUARDIAN CAREERS</h6></div>
+				<ul data-role="listview" data-inset="true" data-filter="true" >
+					<li><a href="#page11" data-transition="fade">General Practitioner</a></li>
+					<li><a href="#page11">Human Resources Officer</a></li>
+					<li><a href="#page11">Police Officer </a></li>
+					<li><a href="#page11">Lawyer</a></li>
+					<li><a href="#page11">Nurse</a></li> 
+				</ul>
+			</div>
+			
+			<div data-role="footer" data-theme="c"  >  
+			  <div data-role="navbar" data-iconpos="top"> 
+			  	<ul>
+			  		<li><a href="" data-transition="fade" class="ui-btn-inactive" data-icon="back" onClick="history.back()">Go Back</a></li>
+			  		<li><a href="#page3" data-transition="fade" class="ui-btn-inactive" data-icon="search">Career Find</a></li>
+			  		<li><a href="#page9" data-transition="fade" class="ui-btn-inactive" data-icon="grid">Recent Jobs</a></li>
+			  	</ul>
+			  </div>
+			</div>
+			
+		</section>
+<!--==========================END SECTION SIX==========================-->
+
+
+<!--==========================SECTION SEVEN - IDEALIST CAREERS==========================-->
+		<section id="page7" data-role="page">
+			
+			<div data-role="content" class="content">
+		
+				<div id="ribbon-i" class="ribbon"><h6>IDEALIST CAREERS</h6></div>
+				<ul data-role="listview" data-inset="true" data-filter="true" >
+					<li><a href="#page12" data-transition="fade">Teacher</a></li>
+					<li><a href="#page12">Civil Rights Advocate</a></li>
+					<li><a href="#page12">Guidance Councellor </a></li>
+					<li><a href="#page12">Psychatrist</a></li>
+					<li><a href="#page12">Journalist</a></li> 
+				</ul>
+			</div>
+			
+			<div data-role="footer" data-theme="c"  >  
+			  <div data-role="navbar" data-iconpos="top"> 
+			  	<ul>
+			  		<li><a data-transition="fade" class="ui-btn-inactive" data-icon="back" onClick="history.back()">Go Back</a></li>
+			  		<li><a href="#page3" data-transition="fade" class="ui-btn-inactive" data-icon="search">Career Find</a></li>
+			  		<li><a href="#page9" data-transition="fade" class="ui-btn-inactive" data-icon="grid">Recent Jobs</a></li>
+			  	</ul>
+			  </div>
+			</div>
+			
+		</section>
+<!--==========================END SECTION SEVEN==========================-->
+
+
+<!--==========================SECTION EIGHT - GRAPHIC DESIGNER==========================-->		
+		<section id="page8" data-role="page">
+			
+			<div data-role="content" class="content" >
+		
+				<div id="ribbon-a" class="ribbon"><h6>GRAPHIC DESIGNER</h6></div>
+				<p>Designers work with clients developing creative and innovative solution for brand and company needs. Working in print, web, and other mediums designers focus on connecting with their audience in a way that properly portrays their client's values.</p>
+				
+				<ul data-role="collapsible-set" >
+				
+					<div id="rationalContainer" data-role="collapsible" data-collapsed="true" data-iconpos="right">
+				        <h3>How to get into the field</h3>
+				        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+				    </div>
+				    
+					<div id="rationalContainer" data-role="collapsible" data-collapsed="true" data-iconpos="right">
+				        <h3>What to expect on the job</h3>
+				        <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti. </p>
+				    </div>
+				    
+					<div id="rationalContainer" data-role="collapsible" data-collapsed="true" data-iconpos="right">
+				        <h3>How to be successful in this career</h3>
+				        <p>Quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere.</p>
+				    </div>
+				    
+					<div id="rationalContainer" data-role="collapsible" data-collapsed="true" data-iconpos="right">
+				        <h3><a href="#page9" data-transition="fade">Recent job postings</a></h3>
+					</div>
+					
+				</ul>
+				
+			</div>
+			
+			<div data-role="footer" data-theme="c"  >  
+			  <div data-role="navbar" data-iconpos="top"> 
+			  	<ul>
+			  		<li><a data-transition="fade" class="ui-btn-inactive" data-icon="back" onClick="history.back()">Go Back</a></li>
+			  		<li><a href="#page3" data-transition="fade" class="ui-btn-inactive" data-icon="search">Career Find</a></li>
+			  		<li><a href="#page9" data-transition="fade" class="ui-btn-inactive" data-icon="grid">Recent Jobs</a></li>
+			  	</ul>
+			  </div>
+			</div>
+			  
+		</section>
+<!--==========================END SECTION EIGHT==========================-->
+
+
+<!--==========================SECTION NINE - RECENT JOBS GRAPHIC DESIGNER==========================-->		
+		<section id="page9" data-role="page">
+			
+			<div data-role="content" class="content">
+				<div id="ribbon-a" class="ribbon"><h6>Recent Jobs:</h6></div>
+				<h3>Graphic Designer:</h3>
+				<ul data-role="collapsable-set" data-inset="true" data-filter="true" >
+				
+					<div id="listing1" data-role="collapsible" data-collapsed="true"  >
+						<h3>Listing 1</h3>
+						<h3>Job information would go here. Specs and basic details. A <a href="http://www.yorku.ca/careers/students/jobsearchprogram/index.htm#rescover">resume</a> is very important in applying to this job</h3>
+					</div>
+					
+					<div id="listing2" data-role="collapsible" data-collapsed="true"  >
+						<h3>Listing 2</h3>
+						<h3>Job information would go here. Specs and basic details. A <a href="http://www.yorku.ca/careers/students/jobsearchprogram/index.htm#cover">cover-letter</a> is very important in applying to this job</h3>
+					</div>
+					
+					<div id="listing3" data-role="collapsible" data-collapsed="true"  >
+						<h3>Listing 3</h3>
+						<h4>Job information would go here. Specs and basic details. A solid<a href="http://www.yorku.ca/careers/students/jobsearchprogram/index.htm#interview"> interview</a> is very important in landing this position</h4>
+					</div>
+					
+					<div id="listing4" data-role="collapsible" data-collapsed="true"  >
+						<h3>Listing 4</h3>
+						<h3>Job information would go here. Specs and basic details. A well prepared visual portfolio is important for review in this position.</h3>
+					</div> 
+					
+					<h3>Want more information?</h3>
+					<p>The York U Career Centre is always hosting helpful workshops and clinic to help you improve your self and reach your career search goals. Drop by the Career Centre website, or visit us in person for one on one advice!<br />
+					   <br />
+					   We're located at 202 Mclaughlin College, on campus.<br /><br />
+					   <a href="#page16" data-transition="fade">Contact the Career Centre</a>
+					</p>
+					
+				</ul>
+				
+			</div>
+			
+			<div data-role="footer" data-theme="c"  >  
+			  <div data-role="navbar" data-iconpos="top"> 
+			  	<ul>
+			  		<li><a data-transition="fade" class="ui-btn-inactive" data-icon="back" onClick="history.back()">Go Back</a></li>
+			  		<li><a href="#page3" data-transition="fade" class="ui-btn-inactive" data-icon="search">Career Find</a></li>
+			  		<li><a href="#page9" data-transition="fade" class="ui-btn-inactive" data-icon="grid">Recent Jobs</a></li>
+			  	</ul>
+			  </div>
+			</div>
+			
+		</section>
+<!--==========================END SECTION NINE==========================-->
+		
+
+<!--==========================SECTION TEN - PHYSICIST==========================-->
+		<section id="page10" data-role="page">
+			
+			<div data-role="content" class="content" >
+		
+				<div id="ribbon-r" class="ribbon"><h6>Physicist</h6></div>
+				<p>Physicists are scientists who investigate motion and gravity, the behaviour of gases, the structure and behaviour of matter, generations and transfer of energy and the interaction between matter and energy. </p>
+				
+				<ul data-role="collapsable-set" data-inset="true" data-filter="true" >
+				
+					<div id="rationalContainer" data-role="collapsible" data-collapsed="true"  data-iconpos="right">
+				        <h3>How to get into the field</h3>
+				        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+				    </div>
+				    
+					<div id="rationalContainer" data-role="collapsible" data-collapsed="true"  data-collapsed="true" data-iconpos="right">
+				        <h3>What to expect on the job</h3>
+				        <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti. </p>
+				    </div>
+				    
+					<div id="rationalContainer" data-role="collapsible" data-collapsed="true"  data-collapsed="true" data-iconpos="right">
+				        <h3>How to be successful in this career</h3>
+				        <p>Quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere.</p>
+				    </div>
+				    
+					<div id="rationalContainer" data-role="collapsible" data-collapsed="true"  data-iconpos="right">
+				        <h3><a href="#page13" data-transition="fade">Recent job postings</a></h3>
+					</div>
+					
+				</ul>
+				
+			</div>
+			
+			<div data-role="footer" data-theme="c"  >  
+			  <div data-role="navbar" data-iconpos="top"> 
+			  	<ul>
+			  		<li><a data-transition="fade" class="ui-btn-inactive" data-icon="back" onClick="history.back()">Go Back</a></li>
+			  		<li><a href="#page3" data-transition="fade" class="ui-btn-inactive" data-icon="search">Career Find</a></li>
+			  		<li><a href="#page9" data-transition="fade" class="ui-btn-inactive" data-icon="grid">Recent Jobs</a></li>
+			  	</ul>
+			  </div>
+			</div>
+			  
+		</section>
+<!--==========================END SECTION TEN==========================-->
+
+
+<!--==========================SECTION ELEVEN - RECENT JOBS PHYSICIST==========================-->		
+		<section id="page13" data-role="page">
+			
+			<div data-role="content" class="content">
+				<div id="ribbon-r" class="ribbon"><h6>Recent Jobs:</h6></div>
+				<h3>Physicist</h3>
+				<ul data-role="collapsable-set" data-inset="true" data-filter="true" >
+				
+					<div id="listing1" data-role="collapsible" data-collapsed="true"  >
+						<h3>Listing 1</h3>
+						<h3>Job information would go here. Specs and basic details. A <a href="http://www.yorku.ca/careers/students/jobsearchprogram/index.htm#rescover">resume</a> is very important in applying to this job</h3>
+					</div>
+					
+					<div id="listing2" data-role="collapsible" data-collapsed="true"  >
+						<h3>Listing 2</h3>
+						<h3>Job information would go here. Specs and basic details. A <a href="http://www.yorku.ca/careers/students/jobsearchprogram/index.htm#cover">cover-letter</a> is very important in applying to this job</h3>
+					</div>
+					
+					<div id="listing3" data-role="collapsible" data-collapsed="true"  >
+						<h3>Listing 3</h3>
+						<h4>Job information would go here. Specs and basic details. A solid<a href="http://www.yorku.ca/careers/students/jobsearchprogram/index.htm#interview"> interview</a> is very important in landing this position</h4>
+					</div>
+					
+					<div id="listing4" data-role="collapsible" data-collapsed="true"  >
+						<h3>Listing 4</h3>
+						<h3>Job information would go here. Specs and basic details. A well prepared visual portfolio is important for review in this position.</h3>
+					</div> 
+					
+					<h3>Want more information?</h3>
+					<p>The York U Career Centre is always hosting helpful workshops and clinic to help you improve your self and reach your career search goals. Drop by the Career Centre website, or visit us in person for one on one advice!<br />
+					   <br />
+					   We're located at 202 Mclaughlin College, on campus.<br /><br />
+					   <a href="#page16" data-transition="fade">Contact the Career Centre</a>
+					</p>
+					
+				</ul>
+				
+			</div>
+			
+			<div data-role="footer" data-theme="c"  >  
+			  <div data-role="navbar" data-iconpos="top"> 
+			  	<ul>
+			  		<li><a data-transition="fade" class="ui-btn-inactive" data-icon="back" onClick="history.back()">Go Back</a></li>
+			  		<li><a href="#page3" data-transition="fade" class="ui-btn-inactive" data-icon="search">Career Find</a></li>
+			  		<li><a href="#page9" data-transition="fade" class="ui-btn-inactive" data-icon="grid">Recent Jobs</a></li>
+			  	</ul>
+			  </div>
+			</div>
+			
+		</section>
+<!--==========================END SECTION ELEVEN==========================-->
+
+
+<!--==========================SECTION TWELVE - GENERAL PRACTITIONER==========================-->		
+		<section id="page11" data-role="page">
+			
+			<div data-role="content" class="content" >
+		
+				<div id="ribbon-g" class="ribbon"><h6>General Practitioner</h6></div>
+				<p>Plans, implements, or administers health programs or standards in hospitals, businesses, or communities for information, prevention, or treatment of injury or illness.</p>
+				
+				<ul data-role="collapsible-set" >
+				
+					<div id="guardianContainer" data-role="collapsible" data-collapsed="true" data-iconpos="right">
+				        <h3>How to get into the field</h3>
+				        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+				    </div>
+				    
+					<div id="guardianlContainer" data-role="collapsible" data-collapsed="true" data-iconpos="right">
+				        <h3>What to expect on the job</h3>
+				        <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti. </p>
+				    </div>
+				    
+					<div id="guardianContainer" data-role="collapsible" data-collapsed="true" data-iconpos="right">
+				        <h3>How to be successful in this career</h3>
+				        <p>Quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere.</p>
+				    </div>
+				    
+					<div id="guardianContainer" data-role="collapsible" data-collapsed="true" data-iconpos="right">
+				        <h3><a href="#page14" data-transition="fade">Recent job postings</a></h3>
+					</div>
+					
+				</ul>
+				
+			</div>
+			
+			<div data-role="footer" data-theme="c"  >  
+			  <div data-role="navbar" data-iconpos="top"> 
+			  	<ul>
+			  		<li><a data-transition="fade" class="ui-btn-inactive" data-icon="back" onClick="history.back()">Go Back</a></li>
+			  		<li><a href="#page3" data-transition="fade" class="ui-btn-inactive" data-icon="search">Career Find</a></li>
+			  		<li><a href="#page9" data-transition="fade" class="ui-btn-inactive" data-icon="grid">Recent Jobs</a></li>
+			  	</ul>
+			  </div>
+			</div>
+			  
+		</section>
+<!--==========================END SECTION TWELVE==========================-->
+
+
+<!--==========================SECTION THIRTEEN - RECENT JOBS GENERAL PRACTITIONER==========================-->
+		<section id="page14" data-role="page">
+			
+			<div data-role="content" class="content">
+				<div id="ribbon-g" class="ribbon"><h6>Recent Jobs:</h6></div>
+				<h3>General Practitioner</h3>
+				<ul data-role="collapsable-set" data-inset="true" data-filter="true" >
+				
+					<div id="listing1" data-role="collapsible" data-collapsed="true"  >
+						<h3>Listing 1</h3>
+						<h3>Job information would go here. Specs and basic details. A <a href="http://www.yorku.ca/careers/students/jobsearchprogram/index.htm#rescover">resume</a> is very important in applying to this job</h3>
+					</div>
+					
+					<div id="listing2" data-role="collapsible" data-collapsed="true"  >
+						<h3>Listing 2</h3>
+						<h3>Job information would go here. Specs and basic details. A <a href="http://www.yorku.ca/careers/students/jobsearchprogram/index.htm#cover">cover-letter</a> is very important in applying to this job</h3>
+					</div>
+					
+					<div id="listing3" data-role="collapsible" data-collapsed="true"  >
+						<h3>Listing 3</h3>
+						<h4>Job information would go here. Specs and basic details. A solid<a href="http://www.yorku.ca/careers/students/jobsearchprogram/index.htm#interview"> interview</a> is very important in landing this position</h4>
+					</div>
+					
+					<div id="listing4" data-role="collapsible" data-collapsed="true"  >
+						<h3>Listing 4</h3>
+						<h3>Job information would go here. Specs and basic details. A well prepared visual portfolio is important for review in this position.</h3>
+					</div> 
+					
+					<h3>Want more information?</h3>
+					<p>The York U Career Centre is always hosting helpful workshops and clinic to help you improve your self and reach your career search goals. Drop by the Career Centre website, or visit us in person for one on one advice!<br />
+					   <br />
+					   We're located at 202 Mclaughlin College, on campus.<br /><br />
+					   <a href="#page16" data-transition="fade">Contact the Career Centre</a>
+					</p>
+					
+				</ul>
+				
+			</div>
+			
+			<div data-role="footer" data-theme="c"  >  
+			  <div data-role="navbar" data-iconpos="top"> 
+			  	<ul>
+			  		<li><a data-transition="fade" class="ui-btn-inactive" data-icon="back" onClick="history.back()">Go Back</a></li>
+			  		<li><a href="#page3" data-transition="fade" class="ui-btn-inactive" data-icon="search">Career Find</a></li>
+			  		<li><a href="#page9" data-transition="fade" class="ui-btn-inactive" data-icon="grid">Recent Jobs</a></li>
+			  	</ul>
+			  </div>
+			</div>
+			
+		</section>
+<!--==========================END SECTION THIRTEEN==========================-->
+
+
+<!--==========================SECTION FOURTEEN - TEACHER==========================-->		
+		<section id="page12" data-role="page">
+			
+			<div data-role="content" class="content" >
+		
+				<div id="ribbon-i" class="ribbon"><h6>Teacher</h6></div>
+				<p>Teachers are responsible for the organization and flow of their classroom and it's students. They organize lesson plans, maintain discipline and orderliness, and carry out lessons so that their students may progress and build a knowledge in the subject matter at hand.</p>
+				
+				<ul data-role="collapsible-set" >
+				
+					<div id="idealistContainer" data-role="collapsible" data-collapsed="true" data-iconpos="right">
+				        <h3>How to get into the field</h3>
+				        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+				    </div>
+				    
+					<div id="idealistContainer" data-role="collapsible" data-collapsed="true" data-iconpos="right">
+				        <h3>What to expect on the job</h3>
+				        <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti. </p>
+				    </div>
+				    
+					<div id="idealistContainer" data-role="collapsible" data-collapsed="true" data-iconpos="right">
+				        <h3>How to be successful in this career</h3>
+				        <p>Quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere.</p>
+				    </div>
+				    
+					<div id="idealistContainer" data-role="collapsible" data-collapsed="true" data-iconpos="right">
+				        <h3><a href="#page15" data-transition="fade">Recent job postings</a></h3>
+					</div>
+					
+				</ul>
+				
+			</div>
+			
+			<div data-role="footer" data-theme="c"  >  
+			  <div data-role="navbar" data-iconpos="top"> 
+			  	<ul>
+			  		<li><a data-transition="fade" class="ui-btn-inactive" data-icon="back" onClick="history.back()">Go Back</a></li>
+			  		<li><a href="#page3" data-transition="fade" class="ui-btn-inactive" data-icon="search">Career Find</a></li>
+			  		<li><a href="#page9" data-transition="fade" class="ui-btn-inactive" data-icon="grid">Recent Jobs</a></li>
+			  	</ul>
+			  </div>
+			</div>
+			  
+		</section>
+<!--==========================END SECTION FOURTEEN==========================-->
+
+		
+<!--==========================SECTION FIFTEEN - RECENT JOBS TEACHER==========================-->	
+		<section id="page15" data-role="page">
+			
+			<div data-role="content" class="content">
+				<div id="ribbon-i" class="ribbon"><h6>Recent Jobs:</h6></div>
+				<h3>Teacher</h3>
+				<ul data-role="collapsable-set" data-inset="true" data-filter="true" >
+				
+					<div id="listing1" data-role="collapsible" data-collapsed="true"  >
+						<h3>Listing 1</h3>
+						<h3>Job information would go here. Specs and basic details. A <a href="http://www.yorku.ca/careers/students/jobsearchprogram/index.htm#rescover">resume</a> is very important in applying to this job</h3>
+					</div>
+					
+					<div id="listing2" data-role="collapsible" data-collapsed="true"  >
+						<h3>Listing 2</h3>
+						<h3>Job information would go here. Specs and basic details. A <a href="http://www.yorku.ca/careers/students/jobsearchprogram/index.htm#cover">cover-letter</a> is very important in applying to this job</h3>
+					</div>
+					
+					<div id="listing3" data-role="collapsible" data-collapsed="true"  >
+						<h3>Listing 3</h3>
+						<h4>Job information would go here. Specs and basic details. A solid<a href="http://www.yorku.ca/careers/students/jobsearchprogram/index.htm#interview"> interview</a> is very important in landing this position</h4>
+					</div>
+					
+					<div id="listing4" data-role="collapsible" data-collapsed="true"  >
+						<h3>Listing 4</h3>
+						<h3>Job information would go here. Specs and basic details. A well prepared visual portfolio is important for review in this position.</h3>
+					</div> 
+					
+					<h3>Want more information?</h3>
+					<p>The York U Career Centre is always hosting helpful workshops and clinic to help you improve your self and reach your career search goals. Drop by the Career Centre website, or visit us in person for one on one advice!<br />
+					   <br />
+					   We're located at 202 Mclaughlin College, on campus.<br /><br />
+					   <a href="#page16" data-transition="fade">Contact the Career Centre</a>
+					</p>
+					
+				</ul>
+				
+			</div>
+			
+			<div data-role="footer" data-theme="c"  >  
+			  <div data-role="navbar" data-iconpos="top"> 
+			  	<ul>
+			  		<li><a data-transition="fade" class="ui-btn-inactive" data-icon="back" onClick="history.back()">Go Back</a></li>
+			  		<li><a href="#page3" data-transition="fade" class="ui-btn-inactive" data-icon="search">Career Find</a></li>
+			  		<li><a href="#page9" data-transition="fade" class="ui-btn-inactive" data-icon="grid">Recent Jobs</a></li>
+			  	</ul>
+			  </div>
+			</div>
+			
+		</section>
+<!--==========================END SECTION FIFTEEN==========================-->
+
+<!--==========================SECTION SIXTEEN - CAREER CENTER PAGE==========================-->
+		<section id="page16" data-role="page">
+			
+			<div data-role="content" class="content">
+				<div class="ribbonfull"><h6>CAREER CENTER</h6></div>
+				
+				<h3>Mailing Address:</h3>
+				
+				<p>Career Centre<br />
+				202 McLaughlin College<br />
+				York University<br /> 
+				4700 Keele Street <br />
+				Toronto ON M3J 1P3<br />
+				Telephone: 416.736.5351<br />
+				Fax: 416.736.5684<br />
+				Website: www.yorku.ca/careers<br />
+				Email: career@yorku.ca</p>
+				
+				
+				<h3>Hours of Operation</h3>
+				
+				<p>General Hours of Operation<br />
+				Monday to Thursday	9:00 am - 4:00 pm<br />
+				Friday	 10:00 am - 4:00 pm<br /><br />
+				
+				Summer Hours (June 1st - August 31st)<br />
+				Monday to Thursday	9:00 am - 4:00 pm<br />
+				Friday	 10:00 am - 3:00 pm<br />
+				We are closed on statutory and university-wide holidays.</p>
+				
+				
+				</p>
+				
+			</div>
+			
+			<div data-role="footer" data-theme="c"  >  
+			  <div data-role="navbar" data-iconpos="top"> 
+			  	<ul>
+			  		<li><a data-transition="fade" class="ui-btn-inactive" data-icon="back" onClick="history.back()">Go Back</a></li>
+			  		<li><a href="#page3" data-transition="fade" class="ui-btn-inactive" data-icon="search">Career Find</a></li>
+			  		<li><a href="#page9" data-transition="fade" class="ui-btn-inactive" data-icon="grid">Recent Jobs</a></li>
+			  	</ul>
+			  </div>
+			</div>
+			
+		</section>
+		
+
+</body>
+</html>

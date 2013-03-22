@@ -1,0 +1,219 @@
+/*======================GENERAL STYLESHEET======================*/
+
+/* @license
+ * MyFonts Webfont Build ID 2091552, 2012-02-13T23:50:31-0500
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: Insider Medium by Characters Font Foundry
+ * URL: http://www.myfonts.com/fonts/characters/insider/medium/
+ * Copyright: Copyright (c) 2005 by Rene Verkaart. All rights reserved.
+ * Licensed pageviews: unlimited
+ * 
+ * 
+ * License: http://www.myfonts.com/viewlicense?type=web&buildid=2091552
+ * 
+ * © 2012 Bitstream Inc
+*/
+  
+ @font-face {font-family: 'Insider-MediumRoman';src: url('webfonts/1FEA20_0_0.eot');src: url('webfonts/1FEA20_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/1FEA20_0_0.woff') format('woff'),url('webfonts/1FEA20_0_0.ttf') format('truetype');}
+ 
+/* ==============================GENERAL STYLES==============================*/
+
+p {
+	font-family: Insider-MediumRoman, sans-serif;
+	font-size: 0.9em;
+}
+
+h1, h2 {
+	font-family: Insider-MediumRoman, sans-serif !important;
+	font-size: 30px;
+}
+
+h3 {
+	margin-bottom: 0px;
+}
+
+h6 {
+	font-family: Insider-MediumRoman, sans-serif !important;
+	font-size: 1.6em;
+	color: rgb(255, 255, 255);
+	text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+	text-transform: uppercase;
+	margin: -13px 0px 0px 0px;
+	padding: 0px;
+}
+
+#header {
+	margin: 0px, 10px, 0px, 10px;
+}
+
+ul {
+    margin: 0px;
+    padding: 5px;
+}
+
+ul li {
+    list-style: none;
+}
+
+img {
+	width: 100%;
+}
+
+/* ==============================RIBBONS STYLES==============================*/
+
+#ribbon-g {/*YELLOW*/
+	background: rgb(233, 185, 43);
+}
+
+#ribbon-a {/*RED*/
+	background: rgb(165, 10, 32);
+}
+
+#ribbon-i {/*GREEN*/
+	background: rgb(139, 197, 63);
+}
+
+#ribbon-r {/*BLUE*/
+	background: rgb(0, 174, 239);
+}
+
+.ribbonfull{/*GREY*/
+	background: rgba(0, 0, 0, 0.5);
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent; 
+
+	border-right: 20px solid rgb(238, 238, 238);
+	border-left: 20px solid rgb(238, 238, 238);	
+	
+	margin: 5px 0px 20px 0px;	
+	position: relative;
+	height: 0px;
+	text-align: center;
+}
+
+.ribbon{/*GENERAL*/
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent; 
+
+	border-right:20px solid rgb(238, 238, 238);	
+	padding: 0px 0px 0px 10%;
+	margin-top: 5px;
+	position: relative;
+	width: 90%;
+	height: 0px;
+	left: -10%;
+}
+
+/* ==============================INTRO PAGE==============================*/
+
+#mainlogo {/*APP LOGO*/
+	margin: 10% 5% 5% 5%;
+}
+
+#intro {/*INTRO*/
+	margin-top: 10%;
+	margin-right: 8%;
+	margin-left: 8%;
+}
+
+#intro p {
+	margin-bottom: 20px;
+}
+
+/* ==============================TEMPERAMENTS PAGE==============================*/
+
+#artisan, #rational, #idealist, #guardian {
+	display: none;
+}
+
+.bannerRight {/*RIGHT COLUMN*/
+	float: right;
+	width: 48%;
+	margin: 0 auto;
+	padding: 0px;
+}
+
+.bannerLeft {/*LEFT COLUMN*/
+	float: left;
+	width: 48%;
+	margin: 0 auto;
+	padding: 0px;
+}
+
+.badge {
+	margin-bottom: 20px;
+}
+
+.tempinfo {/*TEMPERAMENT EXTRA INFO*/
+	margin: 20% auto; 
+	padding: 0px;
+	width: 50%; height: 40%;
+}
+
+#infobtn {/*BUTTON FOR EXTRA INFO*/
+	position: relative;
+	top: -8.0em; right: 0px;
+	float: right;
+	width: 25%; height: 30%;
+}
+
+/* ==============================OTHER STYLES==============================*/
+
+label {
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	-o-border-radius: 0px;
+}
+
+.ui-btn-text {
+	font-size: 14px;
+	font-family: Insider-MediumRoman, serif;
+}
+
+.filter img{
+	position: relative;
+	top: 3px;
+	margin-right: 10px;
+	width: 23px;
+		
+	-moz-border-radius: 				9px;
+	-webkit-border-radius: 				9px;
+	border-radius: 						9px;
+}
+
+/* ==============================QUIZ RESULT PAGE==============================*/
+
+#quizbtn { /*QUIZ BUTTONS*/
+	margin: -20% 5% 20% 5%;
+}
+
+.quizresult { /*RESULT BADGE*/
+	position: fixed;
+	top: 0px; left: 0px;
+	width: 100%; height: 100%;
+	margin: 0 auto;
+	
+	color: #fff;
+	text-shadow: 1px 0px 1px #000;
+	
+	background: rgba(0, 0, 0, 0.9);
+	z-index: 99999;
+}
+
+#reslogo {
+	margin: 5% 20% 5% 20%;
+}
+
+#resintro {
+	margin-top: 0px;
+	margin-right: 20%;
+	margin-left: 20%;
+}
+
