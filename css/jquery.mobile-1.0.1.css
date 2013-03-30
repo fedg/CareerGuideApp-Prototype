@@ -1630,8 +1630,7 @@ Built by David Kaneda and maintained by Jonathan Stark.
 .ui-btn-icon-top .ui-btn-inner { padding-top: 33px; }
 .ui-header .ui-btn-icon-top .ui-btn-inner,
 .ui-footer .ui-btn-icon-top .ui-btn-inner,
-.ui-bar .ui-btn-icon-top .ui-btn-inner { padding-top: 27px; padding-right: 30px;
-padding-left: 30px;}
+.ui-bar .ui-btn-icon-top .ui-btn-inner { padding-top: 27px; }
 .ui-btn-icon-bottom .ui-btn-inner { padding-bottom: 33px; }
 .ui-header .ui-btn-icon-bottom .ui-btn-inner,
 .ui-footer .ui-btn-icon-bottom .ui-btn-inner,
